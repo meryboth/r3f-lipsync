@@ -44,6 +44,8 @@ export function Avatar(props) {
   const jsonFile = useLoader(THREE.FileLoader, `audios/${script}.json`);
   const lipsync = JSON.parse(jsonFile);
 
+
+
   useFrame(() => {
     const currentAudioTime = audio.currentTime;
     if (audio.paused || audio.ended) {
@@ -185,6 +187,11 @@ export function Avatar(props) {
       group.current.getObjectByName("Head").lookAt(state.camera.position);
     }
   });
+
+  useEffect(() => {
+    console.log(nodes.Wolf3D_Head.morphTargetDictionary);
+    nodes.Wolf3D_Head.morphTargetInfluences[nodes.Wolf3D_Head.morphTargetDictionary['mouthSmile']] = 1;
+  }, []);
 
   return (
     <group {...props} dispose={null} ref={group}>
